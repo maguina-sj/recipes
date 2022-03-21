@@ -60,7 +60,7 @@ def updateRecipe():
     Recipe.update(data)
     return redirect('/dashboard')
 
-@app.route('/recipe/show/<int:id>')
+@app.route('/recipes/show/<int:id>')
 def showRecipe(id):
     if 'user_id' not in session:
         flash("You must be logged in to view this page")
