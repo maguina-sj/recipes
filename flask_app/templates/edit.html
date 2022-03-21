@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Edit Recipe</title>
+</head>
+<body>
+    <div>
+        {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+    </div>
+    <form action="/recipes/update/{{recipe.id}}", method="post">
+        <input type="hidden" name="id" value="{{recipe.id}}">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{recipe.name}}">
+        <label for="description">Description:</label>
+        <input type="textarea" name="description" value="{{recipe.description}}">
+        <label for="instructions">Instructions:</label>
+        <input type="textarea" name="instructions" value="{{recipe.instructions}}">
+        <label for="date_made">Date Made On:</label>
+        <input type="text" name="date_made" value="{{recipe.date_made}}">
+        <label for="thirtymin">Under 30 Minutes?</label>
+        <input type="radio" name="thirtymin" value="0">
+        <label for="0">No</label>
+        <input type="radio" name="thirtymin" value="1">
+        <label for="1">Yes</label>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

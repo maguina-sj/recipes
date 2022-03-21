@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome {{user.first_name}}!</h1>
+    <p>Here are the available recipes</p>
+    <table class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Under 30 minutes?</th>
+            <th>Actions</th>
+        </tr>
+        {% for recipe in recipes %}
+        <tr>
+            <td>{{recipe.name}}</td>
+            {% if recipe.thirtymin == 1 %}
+            <td>Yes</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+            <td>
+                <a href="/recipes/show/{{recipe.id}}">View</a> |
+                {% if recipe.user_id == session.user_id %}
+                <a href="/recipes/edit/{{recipe.id}}">Edit</a> |
+                <a href="/recipes/delete/{{recipe.id}}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/recipes/new">Create</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>
